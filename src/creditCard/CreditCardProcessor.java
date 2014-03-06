@@ -16,9 +16,6 @@
   */
 package creditCard;
 
-import billing.ChargeResult;
-import billing.UnreachableException;
-import creditCard.CreditCard;
 
 /**
  * 
@@ -26,18 +23,5 @@ import creditCard.CreditCard;
  */
 public interface CreditCardProcessor {
 
-    /**
-     * @param creditCard
-     * @param amount
-     * @return
-     */
-    ChargeResult charge(CreditCard creditCard, int amount) throws UnreachableException;
-
-
-    /**
-     * @return
-     */
-    CreditCard getCardOfOnlyCharge();
- 
-    int getAmountOfOnlyCharge();
+	void paymentProcessing(CreditCard creditCard);
 }

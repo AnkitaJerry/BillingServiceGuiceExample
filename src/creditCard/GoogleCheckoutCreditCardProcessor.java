@@ -16,10 +16,6 @@
   */
 package creditCard;
 
-import billing.ChargeResult;
-import billing.UnreachableException;
-import creditCard.CreditCardProcessor;
-import creditCard.CreditCard;
 
 /**
  * 
@@ -27,31 +23,10 @@ import creditCard.CreditCard;
  */
 public class GoogleCheckoutCreditCardProcessor implements CreditCardProcessor {
 
-    /* (non-Javadoc)
-     * @see com.agisoft.app.juice.CreditCardProcessor#charge(com.agisoft.app.juice.CreditCard, int)
-     */
-    @Override
-    public ChargeResult charge(CreditCard creditCard, int amount) throws UnreachableException {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /* (non-Javadoc)
-     * @see com.agisoft.app.juice.CreditCardProcessor#getCardOfOnlyCharge()
-     */
-    @Override
-    public CreditCard getCardOfOnlyCharge() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /* (non-Javadoc)
-     * @see com.agisoft.app.juice.CreditCardProcessor#getAmountOfOnlyCharge()
-     */
-    @Override
-    public int getAmountOfOnlyCharge() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
+	@Override
+	public void paymentProcessing(CreditCard creditCard) {
+		System.out.println("Procesando pago Google Chechout");
+		
+	}
 
 }

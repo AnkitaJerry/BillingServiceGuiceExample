@@ -1,6 +1,6 @@
 /* 
   * ============================================================================ 
-  * Name      : PizzaOrder.java
+  * Name      : BillingModule.java
   * Part of     :  NEON
   * 
   * Copyright (c) 2007-2011 Nokia.  All rights reserved.
@@ -16,32 +16,14 @@
   */
 package billing;
 
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
+import com.google.inject.AbstractModule;
 
-/**
- * 
- *
- */
-public class PizzaOrder {
-    
-    /**
-     * @param amount
-     */
-    @Inject
-    public PizzaOrder(Integer amount) {
-        this.amount = amount;
-    }
+import creditCard.CreditCardProcessor;
+import creditCard.PaypalCreditCardProcessor;
 
-
-    Integer amount;
-    
-
-    /**
-     * @return
-     */
-    Integer getAmount() {
-        return amount; 
-    }
-
+public class PayPalModule extends AbstractModule {
+  @Override 
+  protected void configure() {
+    bind(CreditCardProcessor.class).to(PaypalCreditCardProcessor.class);
+  }
 }

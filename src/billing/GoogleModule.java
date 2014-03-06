@@ -1,6 +1,6 @@
 /* 
   * ============================================================================ 
-  * Name      : CreditCardProcessorFactory.java
+  * Name      : BillingModule.java
   * Part of     :  NEON
   * 
   * Copyright (c) 2007-2011 Nokia.  All rights reserved.
@@ -14,23 +14,16 @@
  * 
   * ============================================================================
   */
-package creditCard;
+package billing;
+
+import com.google.inject.AbstractModule;
 
 import creditCard.CreditCardProcessor;
+import creditCard.GoogleCheckoutCreditCardProcessor;
 
-public class CreditCardProcessorFactory {
-  
-  private static CreditCardProcessor instance;
-  
-  public static void setInstance(CreditCardProcessor creditCardProcessor) {
-    instance = creditCardProcessor;
-  }
-
-  public static CreditCardProcessor getInstance() {
-    if (instance == null) {
-      return new PaypalCreditCardProcessor();
-    }
-    
-    return instance;
+public class GoogleModule extends AbstractModule {
+  @Override 
+  protected void configure() {
+    bind(CreditCardProcessor.class).to(GoogleCheckoutCreditCardProcessor.class);
   }
 }
