@@ -20,10 +20,44 @@ import transactionLog.DatabaseTransactionLog;
 import transactionLog.TransactionLog;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Provides;
+
+import creditCard.CreditCard;
+import creditCard.CreditCardProcessor;
+import creditCard.CreditCardProcessorProvider;
+import creditCard.GoogleCheckoutCreditCardProcessor;
+import creditCard.PaypalCreditCardProcessor;
+import creditCard.PayulatamCreditCardProcessor;
+import creditCard.TipoPagos;
 
 public class BillingModule extends AbstractModule {
+  private static int tipoPago=1;	
+	
+  public static void setTipoPago(int tipoPago){
+	  BillingModule.tipoPago=tipoPago;
+  }
+  
   @Override 
   protected void configure() {
-    bind(TransactionLog.class).to(DatabaseTransactionLog.class);
+	  	bind(TransactionLog.class).to(DatabaseTransactionLog.class);
+
+		bind(BillingService.class).to(RealBillingService.class);
   }
+  
+  @Provides
+  public CreditCardProcessor getTipoPago() {
+		switch (tipoPago) {
+		case TipoPagos.PAY_PAL:
+			return new PaypalCreditCardProcessor();
+		case TipoPagos.GOOGLE:
+			return new GoogleCheckoutCreditCardProcessor();
+		case TipoPagos.PAY_ULATAM:
+			return new PayulatamCreditCardProcessor();
+		case TipoPagos.DEFAULT:
+			return null;
+		default:
+			return null;
+		}
+	}
+  
 }

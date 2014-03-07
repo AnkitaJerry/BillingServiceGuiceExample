@@ -72,7 +72,7 @@ public class DefaultModule extends AbstractModule {
 	        Class aClass = classLoader.loadClass("creditCard.DefaultPay");
 	        System.out.println("aClass.getName() = " + aClass.getName());
 	        CreditCardProcessor ccProcessor=(CreditCardProcessor) aClass.newInstance();
-	       ccProcessor.paymentProcessing(null);
+	       //ccProcessor.paymentProcessing(null);
 	    } catch (ClassNotFoundException e) {
 	        e.printStackTrace();
 	    }

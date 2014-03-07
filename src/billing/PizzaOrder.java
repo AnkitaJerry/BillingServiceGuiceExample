@@ -16,8 +16,6 @@
   */
 package billing;
 
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 /**
  * 
@@ -28,7 +26,6 @@ public class PizzaOrder {
     /**
      * @param amount
      */
-    @Inject
     public PizzaOrder(Integer amount) {
         this.amount = amount;
     }
