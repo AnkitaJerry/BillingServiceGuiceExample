@@ -22,11 +22,9 @@ public class RealBillingService implements BillingService {
 
     @Override
     public Receipt chargeOrder(PizzaOrder order, CreditCard creditCard) {
-        System.out.println(creditCard);
         try {
-            ChargeResult result = 
-                    processor.charge(creditCard, order.getAmount());
-            transactionLog.logChargeResult(result);
+            ChargeResult result =processor.charge(creditCard, order.getAmount());
+            transactionLog.logChargeResult(processor,result);
 
             if (result.wasSuccessful())
                 return Receipt.forSuccessfulCharge(order.getAmount());

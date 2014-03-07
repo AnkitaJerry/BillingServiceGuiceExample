@@ -12,4 +12,9 @@ public class PaypalCreditCardProcessor implements CreditCardProcessor {
 		return new ChargeResult(true, "PayPal");
 	}
     
+	
+	@Override
+	public String toString() {
+		return "Procesando Pay Pal";
+	}
 }

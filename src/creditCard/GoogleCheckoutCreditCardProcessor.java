@@ -20,16 +20,11 @@ import billing.ChargeResult;
 import billing.UnreachableException;
 
 
-/**
- * 
- *
- */
 public class GoogleCheckoutCreditCardProcessor implements CreditCardProcessor {
-
 
 	@Override
 	public ChargeResult charge(CreditCard creditCard, int amount) throws UnreachableException {
-		// TODO Auto-generated method stub
+		System.out.println("Procesando Google");
 		return new ChargeResult(true, "Google");
 	}
 

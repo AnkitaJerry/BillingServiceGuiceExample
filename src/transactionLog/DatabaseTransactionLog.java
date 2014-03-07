@@ -16,6 +16,7 @@
   */
 package transactionLog;
 
+import creditCard.CreditCardProcessor;
 import billing.ChargeResult;
 import billing.UnreachableException;
 
@@ -29,8 +30,8 @@ public class DatabaseTransactionLog implements TransactionLog {
      * @see com.agisoft.app.juice.TransactionLog#logChargeResult(com.agisoft.app.juice.ChargeResult)
      */
     @Override
-    public void logChargeResult(ChargeResult result) {
-        // TODO Auto-generated method stub
+    public void logChargeResult(CreditCardProcessor procesor ,ChargeResult result) {
+        System.out.println("Procesor :"+procesor);
         
     }
 

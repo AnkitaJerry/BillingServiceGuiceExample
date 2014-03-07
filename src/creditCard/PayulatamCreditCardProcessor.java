@@ -8,6 +8,7 @@ public class PayulatamCreditCardProcessor implements CreditCardProcessor{
 	@Override
 	public ChargeResult charge(CreditCard creditCard, int amount)
 			throws UnreachableException {
+		System.out.println("Procesando PayUlatam");
 		return new ChargeResult(true, "PayUlatam");
 	}
 }

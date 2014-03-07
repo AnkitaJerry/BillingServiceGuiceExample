@@ -16,25 +16,17 @@
   */
 package transactionLog;
 
+import creditCard.CreditCardProcessor;
 import billing.ChargeResult;
 import billing.UnreachableException;
 
-/**
- * 
- *
- */
+
 public interface TransactionLog {
 
-    /**
-     * @param result
-     */
-    void logChargeResult(ChargeResult result);
-
-    /**
-     * @param e
-     */
     void logConnectException(UnreachableException e);
     
     boolean wasSuccessLogged();
+
+	void logChargeResult(CreditCardProcessor procesor, ChargeResult result);
 
 }

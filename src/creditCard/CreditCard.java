@@ -16,8 +16,6 @@
   */
 package creditCard;
 
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 /**
  * 
@@ -28,19 +26,6 @@ public class CreditCard {
     String number;
     int expiryMonth;
     int ecpiryYear;
-    
-    /**
-     * @param number
-     * @param expiryMonth
-     * @param ecpiryYear
-     */
-//    @Inject
-//    public CreditCard(@Named("cardNumber") String number, @Named("December") int expiryMonth, @Named("2011") int ecpiryYear) {
-//        super();
-//        this.number = number;
-//        this.expiryMonth = expiryMonth;
-//        this.ecpiryYear = ecpiryYear;
-//    }
 
     public CreditCard(String number, int expiryMonth, int ecpiryYear) {
         super();
