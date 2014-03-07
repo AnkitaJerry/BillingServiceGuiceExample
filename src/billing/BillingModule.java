@@ -16,16 +16,9 @@
   */
 package billing;
 
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
-
-import javax.tools.JavaCompiler;
-import javax.tools.ToolProvider;
-
 import transactionLog.DatabaseTransactionLog;
 import transactionLog.TransactionLog;
+import util.ReadConfig;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
@@ -35,12 +28,22 @@ import creditCard.GoogleCheckoutCreditCardProcessor;
 import creditCard.PaypalCreditCardProcessor;
 import creditCard.PayulatamCreditCardProcessor;
 import creditCard.TipoPagos;
+import creditCard.CreditCardProcessorLoader;
+
 
 public class BillingModule extends AbstractModule {
-  private static int tipoPago=1;	
+  private static int tipoPago=0;	
+  private static String customPaymentMethod;
 	
   public static void setTipoPago(int tipoPago){
+	  System.out.println("PaymentsInMenu");
 	  BillingModule.tipoPago=tipoPago;
+  }
+  
+  public static void setTipoPago(String customPaymentMethod){
+	  System.out.println("CustomPayment");
+	  BillingModule.customPaymentMethod = customPaymentMethod;  
+	  tipoPago=0;
   }
   
   @Override 
@@ -51,46 +54,32 @@ public class BillingModule extends AbstractModule {
   }
   
   @Provides
-  public CreditCardProcessor getTipoPago() {
-		switch (tipoPago) {
-		case TipoPagos.PAY_PAL:
-			return new PaypalCreditCardProcessor();
-		case TipoPagos.GOOGLE:
-			return new GoogleCheckoutCreditCardProcessor();
-		case TipoPagos.PAY_ULATAM:
-			return new PayulatamCreditCardProcessor();
-		case TipoPagos.DEFAULT:
-			return getDefaultProcessor();
-		default:
-			return null;
-		}
+  public CreditCardProcessor getTipoPago() throws Exception {
+	  	System.out.println(tipoPago);
+	  	if(tipoPago != 0){
+	  		System.out.println("Entro");
+			switch (tipoPago) {
+			case TipoPagos.PAY_PAL:
+				return new PaypalCreditCardProcessor();
+			case TipoPagos.GOOGLE:
+				return new GoogleCheckoutCreditCardProcessor();
+			case TipoPagos.PAY_ULATAM:
+				return new PayulatamCreditCardProcessor();
+			case TipoPagos.DEFAULT:
+				return new CreditCardProcessorLoader()
+				.getDefaultProcessor("Custom");
+			default:
+				throw new Exception("Payment Method not supported");
+			}
+	  	}else{
+	  		boolean supported = new ReadConfig().checkIfSupportedProcessor(BillingModule.customPaymentMethod);
+			System.out.println(supported + " : " + BillingModule.customPaymentMethod);
+	  		return supported 
+			
+			?  new CreditCardProcessorLoader()
+					.getDefaultProcessor(BillingModule.customPaymentMethod)
+
+			:	null;
+	  	}
 	}
-  
-private CreditCardProcessor getDefaultProcessor() {
-	String fuenteJava = "C:/tmp/defaultPays/Default.java";
-	JavaCompiler compilador = ToolProvider.getSystemJavaCompiler();
-	int resultado = compilador.run(null, null, null, fuenteJava);
-	
-	// Create a File object on the root of the directory containing the class file
-	File file = new File("C:/tmp/defaultPays/");
-
-	try {
-	    // Convert File to a URL
-	    URL url = file.toURL();          // file:/c:/myclasses/
-	    URL[] urls = new URL[]{url};
-
-	    // Create a new class loader with the directory
-	    ClassLoader cl = new URLClassLoader(urls);
-
-	    // Load in the class; MyClass.class should be located in
-	    // the directory file:/c:/myclasses/com/mycompany
-	    Class cls = cl.loadClass("Default");
-	    
-	    return (CreditCardProcessor)cls.newInstance();
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-	return null;
-}
-  
 }

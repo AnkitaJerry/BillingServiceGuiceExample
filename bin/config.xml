@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<wallet location ="/Users/danielmunerasanchez/Desktop/DefaultPaymentsMethods/">
+	<creditcardprocessor>
+		<name>Default</name>
+	</creditcardprocessor>
+	<creditcardprocessor>
+		<name>MasterCard</name>
+	</creditcardprocessor>
+</wallet>
