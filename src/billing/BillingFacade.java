@@ -21,7 +21,7 @@ public class BillingFacade {
 			System.out.println("1 Pago pay pal");
 			System.out.println("2 Google");
 			System.out.println("3 PagoUlatam");
-			System.out.println("4 Default");
+			System.out.println("4 Default directorio carga dinamica en ");
 			System.out.println("x Sair");
 			input = br.readLine().toUpperCase();
 			initBilling(input);
@@ -44,6 +44,5 @@ public class BillingFacade {
 		}
 		BillingService billingService=injector.getInstance(BillingService.class);
 		billingService.chargeOrder(new PizzaOrder(500), new CreditCard("45645", 12, 2016));
-		//billingService.chargeOrder(pizzaOrder, creditCard);
 	}
 }

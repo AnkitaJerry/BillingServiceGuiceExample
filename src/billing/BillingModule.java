@@ -16,15 +16,21 @@
   */
 package billing;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
+
+import javax.tools.JavaCompiler;
+import javax.tools.ToolProvider;
+
 import transactionLog.DatabaseTransactionLog;
 import transactionLog.TransactionLog;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 
-import creditCard.CreditCard;
 import creditCard.CreditCardProcessor;
-import creditCard.CreditCardProcessorProvider;
 import creditCard.GoogleCheckoutCreditCardProcessor;
 import creditCard.PaypalCreditCardProcessor;
 import creditCard.PayulatamCreditCardProcessor;
@@ -54,10 +60,37 @@ public class BillingModule extends AbstractModule {
 		case TipoPagos.PAY_ULATAM:
 			return new PayulatamCreditCardProcessor();
 		case TipoPagos.DEFAULT:
-			return null;
+			return getDefaultProcessor();
 		default:
 			return null;
 		}
 	}
+  
+private CreditCardProcessor getDefaultProcessor() {
+	String fuenteJava = "C:/tmp/defaultPays/Default.java";
+	JavaCompiler compilador = ToolProvider.getSystemJavaCompiler();
+	int resultado = compilador.run(null, null, null, fuenteJava);
+	
+	// Create a File object on the root of the directory containing the class file
+	File file = new File("C:/tmp/defaultPays/");
+
+	try {
+	    // Convert File to a URL
+	    URL url = file.toURL();          // file:/c:/myclasses/
+	    URL[] urls = new URL[]{url};
+
+	    // Create a new class loader with the directory
+	    ClassLoader cl = new URLClassLoader(urls);
+
+	    // Load in the class; MyClass.class should be located in
+	    // the directory file:/c:/myclasses/com/mycompany
+	    Class cls = cl.loadClass("Default");
+	    
+	    return (CreditCardProcessor)cls.newInstance();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	return null;
+}
   
 }
