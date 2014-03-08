@@ -32,18 +32,16 @@ import creditCard.CreditCardProcessorLoader;
 
 
 public class BillingModule extends AbstractModule {
-  private static int tipoPago=0;	
+  private static int paymentMethod=0;	
   private static String customPaymentMethod;
-	
-  public static void setTipoPago(int tipoPago){
-	  System.out.println("PaymentsInMenu");
-	  BillingModule.tipoPago=tipoPago;
+
+  public static void setPaymentMethod(int tipoPago){
+	  BillingModule.paymentMethod=tipoPago;
   }
   
-  public static void setTipoPago(String customPaymentMethod){
-	  System.out.println("CustomPayment");
+  public static void setPaymentMethod(String customPaymentMethod){
 	  BillingModule.customPaymentMethod = customPaymentMethod;  
-	  tipoPago=0;
+	  paymentMethod=0;
   }
   
   @Override 
@@ -54,11 +52,10 @@ public class BillingModule extends AbstractModule {
   }
   
   @Provides
-  public CreditCardProcessor getTipoPago() throws Exception {
-	  	System.out.println(tipoPago);
-	  	if(tipoPago != 0){
-	  		System.out.println("Entro");
-			switch (tipoPago) {
+  public CreditCardProcessor getPaymentMethod() throws Exception {
+	  	System.out.println(paymentMethod);
+	  	if(paymentMethod != 0){
+			switch (paymentMethod) {
 			case TipoPagos.PAY_PAL:
 				return new PaypalCreditCardProcessor();
 			case TipoPagos.GOOGLE:
@@ -67,19 +64,19 @@ public class BillingModule extends AbstractModule {
 				return new PayulatamCreditCardProcessor();
 			case TipoPagos.DEFAULT:
 				return new CreditCardProcessorLoader()
-				.getDefaultProcessor("Custom");
+								.getDefaultProcessor("Custom");
 			default:
 				throw new Exception("Payment Method not supported");
 			}
 	  	}else{
-	  		boolean supported = new ReadConfig().checkIfSupportedProcessor(BillingModule.customPaymentMethod);
-			System.out.println(supported + " : " + BillingModule.customPaymentMethod);
+	  		boolean supported = new ReadConfig()
+	  					.checkIfSupportedProcessor(BillingModule.customPaymentMethod);
+	  		
 	  		return supported 
-			
-			?  new CreditCardProcessorLoader()
-					.getDefaultProcessor(BillingModule.customPaymentMethod)
-
-			:	null;
+				?  new CreditCardProcessorLoader()
+						.getDefaultProcessor(BillingModule.customPaymentMethod)
+	
+				:	null;
 	  	}
 	}
 }

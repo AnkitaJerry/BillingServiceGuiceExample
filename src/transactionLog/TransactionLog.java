@@ -16,8 +16,10 @@
   */
 package transactionLog;
 
+import creditCard.CreditCard;
 import creditCard.CreditCardProcessor;
 import billing.ChargeResult;
+import billing.PizzaOrder;
 import billing.UnreachableException;
 
 
@@ -28,5 +30,6 @@ public interface TransactionLog {
     boolean wasSuccessLogged();
 
 	void logChargeResult(CreditCardProcessor procesor, ChargeResult result);
+	void logChargeDetails(CreditCard creditcard,PizzaOrder order);
 
 }

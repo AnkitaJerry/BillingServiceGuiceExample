@@ -16,8 +16,10 @@
   */
 package transactionLog;
 
+import creditCard.CreditCard;
 import creditCard.CreditCardProcessor;
 import billing.ChargeResult;
+import billing.PizzaOrder;
 import billing.UnreachableException;
 
 /**
@@ -31,7 +33,8 @@ public class DatabaseTransactionLog implements TransactionLog {
      */
     @Override
     public void logChargeResult(CreditCardProcessor procesor ,ChargeResult result) {
-        System.out.println("Procesor :"+procesor);
+        System.out.println("Procesador de metodo de pago :"+ procesor);
+        System.out.println("Resultado: " + result);
         
     }
 
@@ -51,6 +54,14 @@ public class DatabaseTransactionLog implements TransactionLog {
     public boolean wasSuccessLogged() {
         // TODO Auto-generated method stub
         return false;
+    }
+    
+    @Override
+    public void logChargeDetails(CreditCard creditcard,PizzaOrder order){
+    	System.out.println("---------- TRANSACTION DETAILS -----------");
+    	System.out.println("=> Payment Method: " + creditcard.toString());
+    	System.out.println("=> Order: " + order.toString());
+    	System.out.println("------------------------------------------");
     }
 
 }

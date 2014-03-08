@@ -25,17 +25,18 @@ public class CreditCard {
     
     String number;
     int expiryMonth;
-    int ecpiryYear;
+    int expiryYear;
 
-    public CreditCard(String number, int expiryMonth, int ecpiryYear) {
+    public CreditCard(String number, int expiryMonth, int expiryYear) {
         super();
         this.number = number;
         this.expiryMonth = expiryMonth;
-        this.ecpiryYear = ecpiryYear;
+        this.expiryYear = expiryYear;
     }
 
     @Override
     public String toString() {
-        return "CreditCard [number=" + number + ", expiryMonth=" + expiryMonth + ", ecpiryYear=" + ecpiryYear + "]";
+        return "CreditCard Number=" + 
+        		number.toString().replaceAll("^[1-9]{12}", "XXXXXXXXXXXX");
     }
 }
