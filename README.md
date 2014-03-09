@@ -9,6 +9,14 @@ Este es un ejemplo de la utilización de [Google guice](https://code.google.com/
 Como correr el proyecto
 -----------------------
 
+
+Video
+-----
+
+[Video flash]("http://dmuneras.webfactional.com/lectures/videos/BillingService.swf)
+Instrucciones 
+-------------
+
 El proyecto simplemente debe ser importado a eclipse y se debe correr el método main que esta ubicado en la clase: BillingPresentation, luego de correrlo se desplegara el siguiente menú en la consola de eclipse:
 
 
