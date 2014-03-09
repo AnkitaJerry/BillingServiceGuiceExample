@@ -6,4 +6,13 @@
 	<creditcardprocessor>
 		<name>MasterCard</name>
 	</creditcardprocessor>
+	<creditcardprocessor>
+		<name>OperatorProcessor</name>
+	</creditcardprocessor>
+	<creditcardprocessor>
+		<name>Nuevo</name>
+	</creditcardprocessor>
+		<creditcardprocessor>
+		<name>Otro</name>
+	</creditcardprocessor>
 </wallet>

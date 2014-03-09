@@ -24,7 +24,6 @@ public class GoogleCheckoutCreditCardProcessor implements CreditCardProcessor {
 
 	@Override
 	public ChargeResult charge(CreditCard creditCard, int amount) throws UnreachableException {
-		System.out.println("Procesando Google");
 		return new ChargeResult(true, "Google");
 	}
 

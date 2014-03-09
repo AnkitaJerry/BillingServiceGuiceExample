@@ -51,9 +51,9 @@ public class BillingModule extends AbstractModule {
 		bind(BillingService.class).to(RealBillingService.class);
   }
   
+  
   @Provides
   public CreditCardProcessor getPaymentMethod() throws Exception {
-	  	System.out.println(paymentMethod);
 	  	if(paymentMethod != 0){
 			switch (paymentMethod) {
 			case TipoPagos.PAY_PAL:
@@ -68,12 +68,12 @@ public class BillingModule extends AbstractModule {
 	  	}else{
 	  		boolean supported = new ReadConfig()
 	  					.checkIfSupportedProcessor(BillingModule.customPaymentMethod);
-	  		
+	  		System.out.println(supported);
 	  		if(supported){
 	  			return new CreditCardProcessorLoader()
 				.getDefaultProcessor(BillingModule.customPaymentMethod);
 	  		}else{
-	  			throw new Exception("Payment Method not supported");
+	  			throw new Exception("Payment Method not supported." );
 	  		}
 	  	}
 	}
