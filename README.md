@@ -12,16 +12,17 @@ Como correr el proyecto
 El proyecto simplemente debe ser importado a eclipse y se debe correr el método main que esta ubicado en la clase: BillingPresentation.java, luego de correrlo se desplegara el siguiente menú en la consola de eclipse:
 
 
-|------------------------------------------|
-| Seleccione una metodo de pago            |
-| 1 => Pago pay pal                        |
-| 2 => Google                              |
-| 3 => PagoUlatam                          |
-| x => Salir                               |
-| Si conoce otro procesador de tarjetas de |
-| credito soportado puede ingresar su      | 
-| su nombre                                |
-|------------------------------------------|
+```java
+Seleccione una metodo de pago            
+ 1 => Pago pay pal                        
+ 2 => Google                              
+ 3 => PagoUlatam                          
+ x => Salir                               
+ Si conoce otro procesador de tarjetas de 
+ credito soportado puede ingresar su      
+ su nombre                                
+```
+
 Con que metodo de pago quiere pagar: 
 
 
