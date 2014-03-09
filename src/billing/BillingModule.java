@@ -41,7 +41,7 @@ public class BillingModule extends AbstractModule {
   
   public static void setPaymentMethod(String customPaymentMethod){
 	  BillingModule.customPaymentMethod = customPaymentMethod;  
-	  paymentMethod=0;
+	  BillingModule.paymentMethod=0;
   }
   
   @Override 
@@ -62,9 +62,6 @@ public class BillingModule extends AbstractModule {
 				return new GoogleCheckoutCreditCardProcessor();
 			case TipoPagos.PAY_ULATAM:
 				return new PayulatamCreditCardProcessor();
-			case TipoPagos.DEFAULT:
-				return new CreditCardProcessorLoader()
-								.getDefaultProcessor("Custom");
 			default:
 				throw new Exception("Payment Method not supported");
 			}
@@ -72,11 +69,12 @@ public class BillingModule extends AbstractModule {
 	  		boolean supported = new ReadConfig()
 	  					.checkIfSupportedProcessor(BillingModule.customPaymentMethod);
 	  		
-	  		return supported 
-				?  new CreditCardProcessorLoader()
-						.getDefaultProcessor(BillingModule.customPaymentMethod)
-	
-				:	null;
+	  		if(supported){
+	  			return new CreditCardProcessorLoader()
+				.getDefaultProcessor(BillingModule.customPaymentMethod);
+	  		}else{
+	  			throw new Exception("Payment Method not supported");
+	  		}
 	  	}
 	}
 }
