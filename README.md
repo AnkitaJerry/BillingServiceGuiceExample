@@ -51,7 +51,7 @@ Los procesadores de tarjetas de crédito soportados hacen referencia a los proce
 
 **[directorio]:** directorio donde se encuentran las clases con las implementaciones de nuevos procesadores de tarjetas de crédito.
 
-**[nombreProcesador]:** El nombre del procesador es el nombre del archivo .java donde esta la implementación del procesador a cargar.
+**[nombreProcesador]:*** El nombre del procesador es el nombre del archivo .java donde esta la implementación del procesador a cargar.
 
 
 Un ejemplo de procesador es el siguiente:
