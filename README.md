@@ -13,7 +13,12 @@ Como correr el proyecto
 Video
 -----
 
-[Video flash]("http://dmuneras.webfactional.com/lectures/videos/BillingService.swf)
+Para ver el video puede ingresar a:
+
+[http://dmuneras.webfactional.com/lectures/videos/BillingService.swf]("http://dmuneras.webfactional.com/lectures/videos/BillingService.swf)
+
+Si el sitio no abre desde aquí copie y pegue la URL en el navegador.
+
 Instrucciones 
 -------------
 
